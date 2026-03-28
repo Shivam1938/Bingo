@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multiplayer Bingo (1-25)</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header>
+        <h1>🎰 Multiplayer Bingo</h1>
+        <p class="sub">Numbers 1-25 (5x5). First to complete a row/column/diagonal wins!</p>
+      </header>
+
+      <section id="joinSection" class="card">
+        <h2>Get Started</h2>
+        <label class="label">
+          Your name
+          <input id="nameInput" type="text" maxlength="30" placeholder="Enter your name" />
+        </label>
+
+        <div id="playerCountSection" class="playerCountSection hidden">
+          <label class="label">Select Player Count</label>
+          <div class="playerCountButtons">
+            <button id="players2Btn" class="playerCountBtn selected" data-count="2">2 Players</button>
+            <button id="players3Btn" class="playerCountBtn" data-count="3">3 Players</button>
+            <button id="players4Btn" class="playerCountBtn" data-count="4">4 Players</button>
+          </div>
+        </div>
+
+        <div id="customRoomSection" class="customRoomSection hidden">
+          <label class="label">
+            Room Code
+            <input id="codeInput" type="text" maxlength="6" placeholder="e.g. AB12CD" />
+          </label>
+          <label class="label">Select Player Count</label>
+          <div class="playerCountButtons">
+            <button id="customPlayers2Btn" class="playerCountBtn customCountBtn selected" data-count="2">2</button>
+            <button id="customPlayers3Btn" class="playerCountBtn customCountBtn" data-count="3">3</button>
+            <button id="customPlayers4Btn" class="playerCountBtn customCountBtn" data-count="4">4</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <button id="quickMatchBtn" class="primary">Quick Match</button>
+          <button id="customRoomBtn" class="secondary">Custom Room</button>
+          <button id="joinBtn" class="primary hidden">Join Room</button>
+          <button id="backBtn" class="secondary hidden">Back</button>
+          <span id="statusText" class="status"></span>
+        </div>
+
+        <p id="hintText" class="hint">
+          <strong>Quick Match:</strong> Play with strangers in a fast game<br>
+          <strong>Custom Room:</strong> Create/join with friends using a room code
+        </p>
+      </section>
+
+      <section id="gameSection" class="card hidden">
+        <div class="topRow">
+          <div>
+            <div class="muted">Status</div>
+            <div id="statusTag" class="tag">waiting</div>
+          </div>
+          <div id="roomInfoBox" class="roomInfoBox">
+            <div class="muted">Room</div>
+            <div id="roomCodeText" class="roomCode">-</div>
+          </div>
+        </div>
+
+        <div class="buttons">
+          <button id="startBtn" disabled>Start Game (Host)</button>
+          <input
+            id="callNumberInput"
+            type="number"
+            list="numbersList"
+            min="1"
+            max="25"
+            step="1"
+            placeholder="1-25"
+            disabled
+          />
+          <button id="callBtn" disabled>Call</button>
+          <button id="randomBtn" disabled>Random</button>
+        </div>
+
+        <datalist id="numbersList">
+          <option value="1"></option>
+          <option value="2"></option>
+          <option value="3"></option>
+          <option value="4"></option>
+          <option value="5"></option>
+          <option value="6"></option>
+          <option value="7"></option>
+          <option value="8"></option>
+          <option value="9"></option>
+          <option value="10"></option>
+          <option value="11"></option>
+          <option value="12"></option>
+          <option value="13"></option>
+          <option value="14"></option>
+          <option value="15"></option>
+          <option value="16"></option>
+          <option value="17"></option>
+          <option value="18"></option>
+          <option value="19"></option>
+          <option value="20"></option>
+          <option value="21"></option>
+          <option value="22"></option>
+          <option value="23"></option>
+          <option value="24"></option>
+          <option value="25"></option>
+        </datalist>
+
+        <div class="gridWrap">
+          <div>
+            <h3>Your Bingo Card</h3>
+            <div id="card" class="cardGrid" aria-label="Bingo card"></div>
+          </div>
+          <div>
+            <h3>Called Numbers</h3>
+            <div id="called" class="calledList"></div>
+            <div id="winnerBox" class="winnerBox"></div>
+          </div>
+        </div>
+
+        <h3>Players (Waiting for <span id="playerCountDisplay">2</span>)</h3>
+        <div id="players" class="playersList"></div>
+      </section>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/client.js"></script>
+  </body>
+</html>
+
