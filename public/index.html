@@ -3,15 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Multiplayer Bingo (1-25)</title>
+    <title>Bingo</title>
+    <link rel="icon" href="https://tse2.mm.bing.net/th/id/OIP.xjknCCHTvmeg2ZjUygg_hQHaFj?rs=1&pid=ImgDetMain&o=7&rm=3" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512x" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
     <div class="app">
-      <header>
-        <h1>🎰 Multiplayer Bingo</h1>
-        <p class="sub">Numbers 1-25 (5x5). First to complete a row/column/diagonal wins!</p>
+      <header class="headerBox">
+        <div class="logoArea">
+          <img class="logo" src="https://tse2.mm.bing.net/th/id/OIP.xjknCCHTvmeg2ZjUygg_hQHaFj?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Bingo Icon" />
+          <div>
+            <h1>Bingo</h1>
+            <p class="sub">Play bingo with friends</p>
+          </div>
+        </div>
       </header>
+
 
       <section id="joinSection" class="card">
         <h2>Get Started</h2>
@@ -61,6 +72,7 @@
           <div>
             <div class="muted">Status</div>
             <div id="statusTag" class="tag">waiting</div>
+            <div id="lineProgressText" class="lineProgress">0 line</div>
           </div>
           <div id="roomInfoBox" class="roomInfoBox">
             <div class="muted">Room</div>
@@ -70,19 +82,9 @@
 
         <div class="buttons">
           <button id="startBtn" disabled>Start Game (Host)</button>
-          <input
-            id="callNumberInput"
-            type="number"
-            list="numbersList"
-            min="1"
-            max="25"
-            step="1"
-            placeholder="1-25"
-            disabled
-          />
-          <button id="callBtn" disabled>Call</button>
           <button id="randomBtn" disabled>Random</button>
         </div>
+        <div id="callHint" class="muted" style="margin-top: 6px; font-size: 0.95rem;">Click a number on your card to call it when it's your turn.</div>
 
         <datalist id="numbersList">
           <option value="1"></option>
@@ -126,6 +128,62 @@
 
         <h3>Players (Waiting for <span id="playerCountDisplay">2</span>)</h3>
         <div id="players" class="playersList"></div>
+      </section>
+
+      <section class="card" id="helpSection">
+        <h2>Need help?</h2>
+        <p>
+          <button id="showRulesBtn" class="primary">How to Play?</button>
+        </p>
+      </section>
+
+      <section id="rulesPage" class="overlay hidden">
+        <div class="overlayContent">
+          <button id="closeRulesBtn" class="closeBtn">✕</button>
+          <div class="overlayInner">
+            <h2>Bingo Rules</h2>
+            <div class="ruleDetail">
+              <h3>🎮 Start</h3>
+              <p>Enter your name and choose number of players. This step is text-only.</p>
+            </div>
+          <div class="ruleDetail">
+            <h3>🟢 Join</h3>
+            <p>Tap Join Game and wait for everyone to connect.</p>
+          </div>
+          <div class="ruleDetail">
+            <h3>🔁 Play</h3>
+            <p>Take turns selecting numbers from your board—or hit Random if you’re feeling lucky.</p>
+            <div class="exampleBoard examplePlay">
+              <div class="cell">1</div><div class="cell">2</div><div class="cell">3</div><div class="cell">4</div><div class="cell">5</div>
+              <div class="cell">6</div><div class="cell active">7</div><div class="cell">8</div><div class="cell">9</div><div class="cell">10</div>
+              <div class="cell">11</div><div class="cell">12</div><div class="cell">13</div><div class="cell called">14</div><div class="cell">15</div>
+              <div class="cell">16</div><div class="cell">17</div><div class="cell">18</div><div class="cell">19</div><div class="cell">20</div>
+              <div class="cell">21</div><div class="cell">22</div><div class="cell">23</div><div class="cell">24</div><div class="cell">25</div>
+            </div>
+          </div>
+          <div class="ruleDetail">
+            <h3>📈 Score</h3>
+            <p>Each completed row, column, or diagonal = 1 line. Example below highlights exactly 1 complete row.</p>
+            <div class="exampleBoard exampleScore">
+              <div class="cell called">5</div><div class="cell called">10</div><div class="cell called">15</div><div class="cell called">20</div><div class="cell called">25</div>
+              <div class="cell">4</div><div class="cell">9</div><div class="cell">14</div><div class="cell">19</div><div class="cell">24</div>
+              <div class="cell">3</div><div class="cell">8</div><div class="cell">13</div><div class="cell">18</div><div class="cell">23</div>
+              <div class="cell">2</div><div class="cell">7</div><div class="cell">12</div><div class="cell">17</div><div class="cell">22</div>
+              <div class="cell">1</div><div class="cell">6</div><div class="cell">11</div><div class="cell">16</div><div class="cell">21</div>
+            </div>
+          </div>
+          <div class="ruleDetail">
+            <h3>🏆 Win</h3>
+            <p>Exactly 5 completed lines, Example :- 2 rows, 1 column, 2 diagonals.</p>
+            <div class="exampleBoard exampleWin">
+              <div class="cell called">1</div><div class="cell called">2</div><div class="cell called">3</div><div class="cell called">4</div><div class="cell called">5</div>
+              <div class="cell called">6</div><div class="cell called">7</div><div class="cell called">8</div><div class="cell called">9</div><div class="cell called">10</div>
+              <div class="cell called">11</div><div class="cell">12</div><div class="cell called">13</div><div class="cell">14</div><div class="cell">15</div>
+              <div class="cell called">16</div><div class="cell">17</div><div class="cell">18</div><div class="cell called">19</div><div class="cell">20</div>
+              <div class="cell called">21</div><div class="cell">22</div><div class="cell">23</div><div class="cell">24</div><div class="cell called">25</div>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
 

@@ -51,7 +51,8 @@ const LINES_5X5 = (() => {
   return lines;
 })();
 
-function hasBingoForCard(card, calledSet) {
+function countCompletedLines(card, calledSet) {
+  let lines = 0;
   for (const idxs of LINES_5X5) {
     let ok = true;
     for (const idx of idxs) {
@@ -61,9 +62,15 @@ function hasBingoForCard(card, calledSet) {
         break;
       }
     }
-    if (ok) return true;
+    if (ok) {
+      lines += 1;
+    }
   }
-  return false;
+  return lines;
+}
+
+function hasFiveCompletedLines(card, calledSet) {
+  return countCompletedLines(card, calledSet) >= 5;
 }
 
 function callNumberForRoom(room, number) {
@@ -76,10 +83,10 @@ function callNumberForRoom(room, number) {
     status: room.status,
   });
 
-  // Check winners.
+  // Check winners (must complete at least 5 unique lines).
   let winner = null;
   for (const p of room.players.values()) {
-    if (hasBingoForCard(p.card, room.calledSet)) {
+    if (hasFiveCompletedLines(p.card, room.calledSet)) {
       winner = p;
       break;
     }
@@ -292,9 +299,9 @@ io.on("connection", (socket) => {
       currentPlayers: room.players.size,
     });
 
-    // If someone joins mid-game and they already have a bingo, declare it immediately.
+    // If someone joins mid-game and they already have 5 completed lines, declare it immediately.
     if (room.status === "playing" && !room.winnerId) {
-      if (hasBingoForCard(player.card, room.calledSet)) {
+      if (hasFiveCompletedLines(player.card, room.calledSet)) {
         room.status = "finished";
         room.winnerId = player.id;
         room.winnerName = player.name;
