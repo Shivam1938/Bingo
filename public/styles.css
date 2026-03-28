@@ -671,12 +671,7 @@ button.secondary {
   border: 1px solid rgba(255, 255, 255, 0.08);
   margin-top: 8px;
 }
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  font-weight: 700;
-}
-
+  
 .winnerBox {
   margin-top: 12px;
   font-size: 18px;
