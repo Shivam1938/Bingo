@@ -187,7 +187,7 @@ header h1 {
   border-color: rgba(58, 183, 106, 0.9);
 }
 
-..overlay {
+.overlay {
   position: fixed;
   inset: 0;
   background: rgba(3, 8, 22, 0.92);
@@ -236,8 +236,8 @@ header h1 {
 
 .closeBtn {
   position: absolute;
-  right: 14px;
-  top: 14px;
+  right: 10px;
+  top: 10px;
   width: 34px;
   height: 34px;
   line-height: 34px;
@@ -250,6 +250,9 @@ header h1 {
   padding: 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .closeBtn:hover {
@@ -291,17 +294,6 @@ header h1 {
   background: rgba(46,204,113,0.45);
   border-color: rgba(46,204,113,0.8);
   font-weight: 700;
-}
-
-.exampleBoard .cell.called::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 3px;
-  background: rgba(255,255,255,0.95);
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
 }
 
 .exampleBoard .cell.active {
@@ -541,18 +533,17 @@ button.secondary {
   display: inline-block;
   padding: 6px 10px;
   border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  text-transform: lowercase;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .lineProgress {
   margin-top: 4px;
   font-size: 0.95rem;
   color: #93c9ff;
-  font-weight: 600;
-}
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  text-transform: lowercase;
-  font-size: 12px;
   font-weight: 600;
 }
 
