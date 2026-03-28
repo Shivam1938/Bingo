@@ -190,14 +190,13 @@ header h1 {
 ..overlay {
   position: fixed;
   inset: 0;
-  background: rgba(3, 8, 22, 0.88);
+  background: rgba(3, 8, 22, 0.92);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
   padding: 14px;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .overlay.hidden {
@@ -210,31 +209,53 @@ header h1 {
   max-height: 84vh;
   overflow: hidden;
   border-radius: 14px;
-  background: rgba(9, 15, 33, 0.96);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(9, 15, 33, 0.98);
+  border: none;
   padding: 20px 20px 20px;
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 24px 54px rgba(0, 0, 0, 0.55);
 }
 
 .overlayContent .overlayInner {
-  max-height: calc(84vh - 40px);
+  max-height: calc(84vh - 48px);
   overflow-y: auto;
   padding-right: 8px;
 }
 
+/* Minimal scrollbar (hidden) */
+.overlayContent .overlayInner,
+.overlay {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.overlayContent .overlayInner::-webkit-scrollbar,
+.overlay::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
 .closeBtn {
   position: absolute;
-  right: 18px;
-  top: 18px;
+  right: 14px;
+  top: 14px;
   width: 34px;
   height: 34px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.28);
-  background: rgba(7, 12, 30, 0.85);
-  color: #fff;
+  line-height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(7, 12, 30, 0.95);
+  color: #ffffff;
   font-size: 1.1rem;
+  text-align: center;
+  padding: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
   cursor: pointer;
 }
+
+.closeBtn:hover {
+  background: rgba(112, 125, 143, 0.9);
+}
+
 
 .ruleDetail {
   margin-top: 12px;
